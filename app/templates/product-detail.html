@@ -4,14 +4,19 @@
 {% block content %}
 
     <div class="alert alert-info">
-        <h2>{{ item.name }}</h2>
-        <img src="{{ item.image_url }}" alt="" style="max-width: 500px; max-height: 400px;">
-        <h3>Описание:</h3>
-        <p> {{ item.description }}</p>
-        <p><b>Вес: {{ item.weight }}</b></p>
-        <p><b>Количество: {{ item.quantity }}</b></p>
+        <form method="post" action="/add/{{ item.id }}">
+            <h2>{{ item.name }}</h2>
+            <img src="{{ item.image_url }}" alt="" style="max-width: 500px; max-height: 400px;">
+            <h3>Описание:</h3>
+            <p> {{ item.description }}</p>
+            <p><b>Вес: {{ item.weight }}</b></p>
+            <p><b>Количество: {{ item.quantity }}</b></p>
 
-        <h3>Цена: {{ item.price }}</h3>
+            <h3>Цена: {{ item.price }}</h3>
+            <input type="hidden" name="id" value=" {{ item.id }}"/>
+            <input type="text" class="item-quantity" name="quantity" value="1" size="2" />
+            <input type="submit" value="Add to Cart" class="btn btn-light" />
+        </form>
     </div>
 
 

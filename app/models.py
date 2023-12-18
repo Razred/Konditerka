@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from app import db, login_manager
 from flask_login import UserMixin
 
@@ -34,8 +36,10 @@ class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, nullable=False)
     user_name = db.Column(db.String(100), nullable=False)
-    address = address = db.Column(db.String(200), nullable=False)
+    address = db.Column(db.String(200), nullable=False)
     total_price = db.Column(db.String(200), nullable=False)
+    comments = db.Column(db.Text)
+    date = db.Column(db.DateTime, default=datetime.now())
 
     def __repr__(self):
         return f"<Order {self.user_id}, {self.user_name}>"

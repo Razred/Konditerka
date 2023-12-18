@@ -4,7 +4,7 @@
 
 <h2>Оформление заказа</h2>
 
-    <form action="/submit_order" method="post">
+    <form action="/order" method="post">
         <h3>Товары в корзине</h3>
         <div class="cart">
             {% for key, value in cart.items(): %}
@@ -19,7 +19,7 @@
         <textarea name="email" id="email" class="form-control"  placeholder="Введите email">{{ user.email }}</textarea><br>
         <textarea name="phone_number" id="phone_number" class="form-control"  placeholder="Введите телефон">{{ user.phone_number }}</textarea><br>
         <textarea name="address" id="address" class="form-control"  placeholder="Введите адрес доставки">{{ user.address }}</textarea><br>
-        <textarea name="text" id="text" class="form-control"  placeholder="Комментарий к заказу "></textarea><br>
+        <textarea name="comments" id="comments" class="form-control"  placeholder="Комментарий к заказу "></textarea><br>
 
         <h4>Оплата работает только при получении курьеру</h4>
 

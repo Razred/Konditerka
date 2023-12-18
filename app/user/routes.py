@@ -167,26 +167,32 @@ def array_merge(first_array, second_array):
 @users.route('/cart')
 @login_required
 def view_cart():
-    if not session['cart_item']:
-        return redirect('main.catalog')
-    cart = session['cart_item'].items()
-    total_quantity = session['all_total_quantity']
-    total_price = session['all_total_price']
+    cart = {}
+    total_quantity = 0
+    total_price = 0
+    if 'cart_item' in session:
+        cart = session['cart_item'].items()
+        total_quantity = session['all_total_quantity']
+        total_price = session['all_total_price']
     return render_template('cart.html', cart=cart, quantity=total_quantity, price=total_price)
 
 @users.route('/order', methods=['GET', 'POST'])
 @login_required
 def order():
-    if not session['cart_item']:
-        return redirect('main.catalog')
-    if request.method == "POST":
-        order = Order(user_id=current_user.id, user_name=request.form['name'], address=request.form['address'], total_price=request.form['total_price'])
-        db.session.add(order)
-        db.session.commit()
-        flash('Ваш заказ был успешно создан')
-        return redirect(url_for('main.catalog'))
-    else:
-        return render_template('order.html', user=current_user, cart=session['cart_item'], total_price=session['all_total_price'])
+    try:
+        if not 'cart_item' in session:
+            return redirect('main.catalog')
+        if request.method == "POST":
+            order = Order(user_id=current_user.id, user_name=request.form['name'], address=request.form['address'],
+                          total_price=session['all_total_price'], comments=request.form['comments'])
+            db.session.add(order)
+            db.session.commit()
+            flash('Ваш заказ был успешно создан')
+            return redirect(url_for('users.empty_cart'))
+        else:
+            return render_template('order.html', user=current_user, cart=session['cart_item'], total_price=session['all_total_price'])
+    except Exception as e:
+        print(e)
 
 @users.route('/logout')
 def logout():

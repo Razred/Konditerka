@@ -3,7 +3,7 @@
 {% block content %}
 
     <div class="cart-view">
-        {% if cart: %}
+        {% if price: %}
             <div class="items">
                 {% for key, value in cart: %}
                     <h3>{{ value['name'] }}</h3>
