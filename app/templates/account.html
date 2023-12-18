@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<h3> Аккаунт пользователя {{ current_user.name }}</h3>
+<h3> {{ current_user.email }}</h3>
+<h3> {{ current_user.address}}</h3>
+<h3> {{ current_user.phone_number}}</h3>
+<br>
+<a href="/account/update" class="btn btn-success">Редактировать</a>
+
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<form method="post">
+        {% if not user.address %}
+            <textarea name="address" id="address1" class="form-control" placeholder="Введите адрес"></textarea><br>
+            <textarea name="phone_number" id="phone_number1" class="form-control"  placeholder="Введите номер телефона"></textarea><br>
+        {% else %}
+            <textarea name="address" id="address2" class="form-control" placeholder="Введите адрес">{{ user.address }}</textarea><br>
+            <textarea name="phone_number" id="phone_number2" class="form-control"  placeholder="Введите номер телефона">{{ user.phone_number }}</textarea><br>
+
+        {% endif %}
+
+        <input type="submit" class="btn btn-success" value="Обновить">
+    </form>
+
+
+
+
+{% endblock content %}

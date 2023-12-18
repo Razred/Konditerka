@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="cart-view">
+        {% if cart: %}
+            <div class="items">
+                {% for key, value in cart: %}
+                    <h3>{{ value['name'] }}</h3>
+                    <img src="{{ value['image'] }}" alt=""/>
+                    <p>{{ value['price'] }} руб./шт.</p>
+                    <p>{{ value['quantity'] }} шт.</p>
+                    <h3>{{ value['total_price'] }} руб.</h3>
+                <a href="{{ url_for('users.delete_product', id=key) }}">
+                    <span class="glyphicon glyphicon-remove"></span> Удалить
+                </a>
+                {% endfor %}
+            </div>
+            <div class="info">
+                <h2>{{ price }}</h2>
+                <a href="{{ url_for('users.empty_cart', id=key) }} class='btn btn-danger">
+                    <span class="glyphicon glyphicon-remove"></span> Отчистить корзину
+                </a>
+                <a href="/order" class="btn btn-warning">Оформить заказ</a>
+            </div>
+        {% else %}
+            <p>Ваша корзина пуста, если хотите, что то добавить перейдите в <a href="{{ url_for('main.catalog') }}">каталог.</a></p>
+        {% endif %}
+    </div>
+
+{% endblock content %}

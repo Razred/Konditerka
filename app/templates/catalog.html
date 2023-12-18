@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="containder">
+        <h1>Вся продукция</h1>
+
+        {% if  products|length > 0 %}
+            {% for item in products %}
+            <div class="alert alert-info">
+                <form method="post" action="/add/{{ item.id }}">
+                    <img src="{{ item.image_url }}" alt="" style="max-width: 300px; max-height: 300px;">
+                    <h2>{{ item.name }}</h2>
+                    <h3>Цена: {{ item.price }}</h3>
+                    <p><b>Вес: {{ item.weight}}</b></p>
+                    <a href="/catalog/{{ item.id }}" class="btn btn-warning">Детальнее</a>
+                    <div class="add-to-cart">
+                        <input type="hidden" name="id" value=" {{ item.id }}"/>
+                        <input type="text" class="item-quantity" name="quantity" value="1" size="2" />
+                        <input type="submit" value="Add to Cart" class="default-btn" />
+                    </div>
+                </form>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>Все закончилось</p>
+        {% endif %}
+    </div>
+
+{% endblock content %}

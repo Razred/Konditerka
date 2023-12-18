@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<h2>Оформление заказа</h2>
+
+    <form action="/submit_order" method="post">
+        <h3>Товары в корзине</h3>
+        <div class="cart">
+            {% for key, value in cart.items(): %}
+            <a href="/catalog/{{ key }}">{{ value['name'] }}</a>
+            <p>{{ value['total_price'] }} руб.             {{ value['quantity'] }} шт.</p>
+            {% endfor %}
+        </div>
+
+        <h3>Данные покупателя</h3>
+
+        <textarea name="name" id="name" class="form-control" placeholder="Введите имя">{{ user.name }}</textarea><br>
+        <textarea name="email" id="email" class="form-control"  placeholder="Введите email">{{ user.email }}</textarea><br>
+        <textarea name="phone_number" id="phone_number" class="form-control"  placeholder="Введите телефон">{{ user.phone_number }}</textarea><br>
+        <textarea name="address" id="address" class="form-control"  placeholder="Введите адрес доставки">{{ user.address }}</textarea><br>
+        <textarea name="text" id="text" class="form-control"  placeholder="Комментарий к заказу "></textarea><br>
+
+        <h4>Оплата работает только при получении курьеру</h4>
+
+        <h3>Сумма заказа:</h3>
+        <h2>{{ total_price }}</h2>
+
+        <input type="submit" class="btn btn-success" value="Заказать">
+    </form>
+
+
+{% endblock content %}
